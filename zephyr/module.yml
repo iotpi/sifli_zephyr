@@ -1,0 +1,8 @@
+ build:
+  cmake: .
+  kconfig: Kconfig
+  settings:
+    dts_root: .
+    board_root: .
+    soc_root: .
+    module_ext_root: .

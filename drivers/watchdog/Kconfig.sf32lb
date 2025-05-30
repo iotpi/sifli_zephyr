@@ -1,0 +1,4 @@
+config WDT_SF32LB
+	bool "SF32LB Low Power Timers"
+    default y
+    #depends on 

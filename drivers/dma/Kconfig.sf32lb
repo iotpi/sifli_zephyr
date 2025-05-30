@@ -1,0 +1,11 @@
+# Copyright (c) 2025, Qingsong Gou <gouqs@hotmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+config DMA_SF32LB
+	bool "DMA driver for SF32LB family of MCUs"
+	default y
+	depends on DMA
+	depends on DT_HAS_SIFLI_DMA_ENABLED
+	help
+	  Enable DMA driver for SF32LB series of MCUs. This driver provides
+	  support for memory-to-memory transfers and peripheral DMA operations. 

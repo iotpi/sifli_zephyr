@@ -1,0 +1,9 @@
+description: SiFli SF32LB Low Power Timer (LPTIM)
+
+compatible: "sifli,lptim"
+
+include: base.yaml
+
+properties:
+  reg:
+    required: true

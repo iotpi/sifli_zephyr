@@ -1,0 +1,11 @@
+# Copyright (c) 2025, Qingsong Gou <gouqs@hotmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+config PWM_SF32LB
+	bool "PWM driver for SF32LB family of MCUs"
+	default y
+	depends on PWM
+	depends on DT_HAS_SIFLI_PWM_ENABLED
+	help
+	  Enable PWM driver for SF32LB series of MCUs. This driver uses
+	  the timer peripheral to implement PWM functionality. 

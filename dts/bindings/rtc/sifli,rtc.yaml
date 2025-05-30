@@ -1,0 +1,16 @@
+description: SiFli SF32LB RTC controller
+
+compatible: "sifli,rtc"
+
+include: base.yaml
+
+properties:
+  reg:
+    required: true
+
+  interrupts:
+    required: true
+    type: array
+    description: |
+      RTC interrupt. The interrupt number can be found in the SoC's
+      reference manual.

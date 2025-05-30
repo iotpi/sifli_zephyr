@@ -1,0 +1,4 @@
+zephyr_include_directories_ifdef(CONFIG_SOC_FAMILY_SF32LB include)
+
+add_subdirectory_ifdef(CONFIG_SOC_FAMILY_SF32LB modules)
+add_subdirectory_ifdef(CONFIG_SOC_FAMILY_SF32LB drivers)

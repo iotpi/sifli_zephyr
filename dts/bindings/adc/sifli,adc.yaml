@@ -1,0 +1,48 @@
+description: SiFli SF32LB ADC controller
+
+compatible: "sifli,adc"
+
+include: base.yaml
+
+properties:
+  reg:
+    required: true
+
+  interrupts:
+    required: true
+    type: array
+    description: |
+      ADC interrupt. The interrupt number can be found in the SoC's
+      reference manual.
+
+  interrupt-names:
+    required: true
+    type: array
+    items:
+      - const: adc
+
+  clocks:
+    required: true
+    type: array
+    description: |
+      Clock gate information. The clock gate can be found in the SoC's
+      reference manual.
+
+  clock-names:
+    required: true
+    type: array
+    items:
+      - const: adc
+
+  resets:
+    required: true
+    type: array
+    description: |
+      Reset line information. The reset line can be found in the SoC's
+      reference manual.
+
+  reset-names:
+    required: true
+    type: array
+    items:
+      - const: adc 

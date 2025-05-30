@@ -1,0 +1,11 @@
+# Copyright (c) 2025, Qingsong Gou <gouqs@hotmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+config COUNTER_SF32LB
+	bool "Counter driver for SF32LB family of MCUs"
+	default y
+	depends on COUNTER
+	depends on DT_HAS_SIFLI_COUNTER_ENABLED
+	help
+	  Enable counter driver for SF32LB series of MCUs. This driver uses
+	  the LPTIM peripheral to implement the counter functionality. 
