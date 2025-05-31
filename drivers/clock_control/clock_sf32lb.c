@@ -17,11 +17,7 @@
 
 LOG_MODULE_REGISTER(clock_sf32lb, CONFIG_CLOCK_CONTROL_LOG_LEVEL);
 
-#define SF32LB_CLOCK_ID_OFFSET(id) (((id) >> 6U) & 0xFFU)
-#define SF32LB_CLOCK_ID_BIT(id)	 ((id) & 0x1FU)
-
 struct sf32lb_clock_config {
-	uint32_t base;
 };
 
 /* Clock control device data */
@@ -34,23 +30,22 @@ struct sf32lb_clock_data {
 
 /* Clock control device API */
 static int sf32lb_clock_control_on(const struct device *dev,
-				 clock_control_subsys_t sys)
+				 clock_control_subsys_t subsys)
 {
-	const struct sf32lb_clock_config *config = dev->config;
-
-    struct sf32lb_rcc_clock * rcc = (struct sf32lb_rcc_clock * )sys;
-	sys_set_bit(config->base + rcc->reg, rcc->bit);
+    // const struct sf32lb_clock_config *config = dev->config;
+    ARG_UNUSED(dev);
+    struct sf32lb_rcc_clock * rcc = (struct sf32lb_rcc_clock * )subsys;
+	sys_set_bit(DT_REG_ADDR(DT_NODELABEL(rcc)) + rcc->reg, rcc->bit);
 
 	return 0;
 }
 
 static int sf32lb_clock_control_off(const struct device *dev,
-				  clock_control_subsys_t sys)
+				  clock_control_subsys_t subsys)
 {
-	const struct sf32lb_clock_config *config = dev->config;
-	uint16_t id = *(uint16_t *)sys;
-
-	sys_clear_bit(config->base + SF32LB_CLOCK_ID_OFFSET(id), SF32LB_CLOCK_ID_BIT(id));
+    ARG_UNUSED(dev);
+    struct sf32lb_rcc_clock * rcc = (struct sf32lb_rcc_clock * )subsys;
+	sys_clear_bit(DT_REG_ADDR(DT_NODELABEL(rcc)) + rcc->reg, rcc->bit);
 
 	return 0;
 }
@@ -102,7 +97,6 @@ static int sf32lb_clock_init(const struct device *dev)
 /* Device configuration */
 #define SF32LB_CLOCK_INIT(n) \
 	static const struct sf32lb_clock_config sf32lb_clock_config_##n = { \
-		.base = DT_INST_REG_ADDR(n),\
 	}; \
 	static struct sf32lb_clock_data sf32lb_clock_data_##n; \
 	DEVICE_DT_INST_DEFINE(n, \

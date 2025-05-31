@@ -9,8 +9,9 @@
 /**
  * clock offset
  */
-#define ECR1 0x18
-#define ECR2 0x1C
+
+#define ENR1 0x08
+#define ENR2 0x0C
 
 /**
  * clock id
