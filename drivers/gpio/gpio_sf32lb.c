@@ -13,6 +13,7 @@
 #include <zephyr/sys/util.h>
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
+#include <zephyr/drivers/clock_control/sf32lb_clock_control.h>
 
 #include "bf0_hal_gpio.h"
 
@@ -24,7 +25,7 @@ struct gpio_sf32lb_config {
 	uint8_t irq_num;
 	uint8_t irq_priority;
 	const struct device *clock_dev;
-	const clock_control_subsys_t clock_subsys;
+	const struct sf32lb_rcc_clock rcc;
 	void (*irq_cfg_func)(void);
 };
 
@@ -219,29 +220,32 @@ static int gpio_sf32lb_init(const struct device *dev)
 {
 	int ret = 0;
 	const struct gpio_sf32lb_config *config = dev->config;
-	ret = clock_control_on(config->clock_dev, config->clock_subsys);
+	ret = clock_control_on(config->clock_dev, &config->rcc);
 
 	config->irq_cfg_func();
 
 	return ret;
 }
 
-#define SF32LB_GPIO_INIT(n)                                                                        \
-	static struct gpio_sf32lb_data gpio_sf32lb_data_##n = {                                    \
-		.lock = Z_MUTEX_INITIALIZER(gpio_sf32lb_data_##n.lock),                            \
-		.pin_state = 0,                                                                    \
-		.pin_callback_enables = 0,                                                         \
-	};                                                                                    \
-                                                                                        \
-	static void gpio_sf32lb_irq_config_##n(void);                                          \
-	                                                                                      \
-	static const struct gpio_sf32lb_config gpio_sf32lb_config_##n = {                          \
-		.port_pin_count = DT_INST_PROP(n, ngpios),                                         \
-		.reg_base = (GPIO_TypeDef *)DT_INST_REG_ADDR(n),                                   \
-		.irq_num = DT_INST_IRQN(n),                                                        \
-		.irq_priority = DT_INST_IRQ(n, priority),                                          \
-		.clock_dev = DEVICE_DT_GET(DT_INST_CLOCKS_CTLR(n)),                                          \
-		.clock_subsys = (clock_control_subsys_t)DT_INST_CLOCKS_CELL(n, id), \
+#define SF32LB_GPIO_INIT(n)                                             \
+  static struct gpio_sf32lb_data gpio_sf32lb_data_##n = {               \
+    .lock = Z_MUTEX_INITIALIZER(gpio_sf32lb_data_##n.lock),             \
+    .pin_state = 0,                                                     \
+    .pin_callback_enables = 0,                                          \
+  };                                                                    \
+                                                                        \
+  static void gpio_sf32lb_irq_config_##n(void);                         \
+                                                                        \
+  static const struct gpio_sf32lb_config gpio_sf32lb_config_##n = {     \
+      .port_pin_count = DT_INST_PROP(n, ngpios),                        \
+      .reg_base = (GPIO_TypeDef *)DT_INST_REG_ADDR(n),                  \
+      .irq_num = DT_INST_IRQN(n),                                       \
+      .irq_priority = DT_INST_IRQ(n, priority),                         \
+      .clock_dev = DEVICE_DT_GET(DT_INST_CLOCKS_CTLR(n)),               \
+      .rcc = {                                  \
+.reg = DT_INST_CLOCKS_CELL(n, reg),             \
+.bit = DT_INST_CLOCKS_CELL(n, bit),             \
+  },                                                                    \
 		.irq_cfg_func = gpio_sf32lb_irq_config_##n,                                          \
 	};                                                                                         \
 	static void gpio_sf32lb_irq_config_##n(void)                                               \

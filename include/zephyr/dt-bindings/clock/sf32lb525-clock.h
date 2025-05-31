@@ -1,17 +1,16 @@
 /*
  * Copyright (c) 2025, Qingsong Gou <gouqs@foxmail.com>
+ * Copyright (c) 2025, Qingdao IotPi Ltd.
  * SPDX-License-Identifier: Apache-2.0
  */
 #ifndef ZEPHYR_INCLUDE_DT_BINDINGS_CLOCK_SF32LB525_CLOCK_H_
 #define ZEPHYR_INCLUDE_DT_BINDINGS_CLOCK_SF32LB525_CLOCK_H_
 
-#define SF32LB_CLOCK(offset, pos) ((offset) << 6 | (pos))
-
 /**
  * clock offset
  */
-#define ECR1 0
-#define ECR2 1
+#define ECR1 0x18
+#define ECR2 0x1C
 
 /**
  * clock id

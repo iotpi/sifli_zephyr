@@ -55,6 +55,13 @@
 	status = "okay";
 };
 
+&clk_sys {
+	//clock-src = <0>;//FXIME: using CLK_HRC48 CLK_HXT48 CLK_DLL1
+	hdiv = <0>;
+	pdiv1 = <0>;
+	pdiv2 = <0>;
+    status = "okay";
+};
 
 &pll {
 	clocks = <&clk_hxt48m>;
@@ -117,10 +124,10 @@
 	current-speed = <1000000>;
 	status = "okay";
 };
-
+/*
 &i2c0 {
 	pinctrl-0 = <&i2c0_default>;
 	pinctrl-names = "default";
 	status = "okay";
 };
-
+*/

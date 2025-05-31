@@ -13,6 +13,8 @@
 #include <zephyr/drivers/clock_control.h>
 #include <zephyr/logging/log.h>
 
+#include <zephyr/drivers/clock_control/sf32lb_clock_control.h>
+
 LOG_MODULE_REGISTER(clock_sf32lb, CONFIG_CLOCK_CONTROL_LOG_LEVEL);
 
 #define SF32LB_CLOCK_ID_OFFSET(id) (((id) >> 6U) & 0xFFU)
@@ -35,9 +37,9 @@ static int sf32lb_clock_control_on(const struct device *dev,
 				 clock_control_subsys_t sys)
 {
 	const struct sf32lb_clock_config *config = dev->config;
-	uint16_t id = *(uint16_t *)sys;
 
-	sys_set_bit(config->base + SF32LB_CLOCK_ID_OFFSET(id), SF32LB_CLOCK_ID_BIT(id));
+    struct sf32lb_rcc_clock * rcc = (struct sf32lb_rcc_clock * )sys;
+	sys_set_bit(config->base + rcc->reg, rcc->bit);
 
 	return 0;
 }

@@ -164,7 +164,7 @@
 		mpi1: psram-controller@50041000 {
 			compatible = "sifli,mpi-controller", "sifli,sf32lb52-flash-controller";
 			reg = <0x50041000 0x1000>;
-			clocks = <&rcc SF32LB_CLOCK(ECR1, MPI1)>;
+			clocks = <&rcc ECR1 MPI1>;
 
 			#address-cells = <1>;
 			#size-cells = <1>;
@@ -177,7 +177,7 @@
 		mpi2: flash-controller@50042000 {
 			compatible = "sifli,mpi-controller", "sifli,sf32lb-flash-controller";
 			reg = <0x50042000 0x1000>;
-			clocks = <&rcc SF32LB_CLOCK(ECR1, MPI2)>;
+			clocks = <&rcc ECR1 MPI2>;
 
 			#address-cells = <1>;
 			#size-cells = <1>;
@@ -191,7 +191,7 @@
 		};
 		rcc: rcc@50000000 {
 			compatible = "sifli,rcc";
-			#clock-cells = <1>;
+			#clock-cells = <2>;
 			reg = <0x50000000 0x1000>;
 
 			rctl: reset-controller {
@@ -211,7 +211,7 @@
 			gpio-controller;
 			#gpio-cells = <2>;
 			reg = <0x500a0000 0x2000>;
-			clocks = <&rcc SF32LB_CLOCK(ECR2, GPIO1)>;
+			clocks = <&rcc ECR2 GPIO1>;
 			interrupts = <84 0>;
 		};
 /*
@@ -241,11 +241,11 @@
 			current-speed = <1000000>;
 			status = "disabled";
 		};
-
+/*
 		gptimer1: timers@50090000 {
 			compatible = "sifli,timers";
 			reg = <0x50090000 0x400>;
-			clocks = <&rcc SF32LB_CLOCK(ECR1, GPTIM1)>;
+			clocks = <&rcc ECR1 GPTIM1>;
 			//resets = <&rctl SF32LB_RESET(APB2, 11U)>;
 			interrupts = <70 0>, <25 0>, <26 0>, <27 0>;
 			interrupt-names = "brk", "up", "trgcom", "cc";
@@ -262,11 +262,10 @@
 				status = "disabled";
 			};
 		};
-
 		btim1: timers@50092000 {
 			compatible = "sifli,timers";
 			reg = <0x50092000 0x400>;
-			clocks = <&rcc SF32LB_CLOCK(ECR1, BTIM1)>;
+			clocks = <&rcc ECR1 BTIM1>;
 			//resets = <&rctl SF32LB_RESET(APB1L, 0U)>;
 			interrupts = <72 0>;
 			interrupt-names = "global";
@@ -284,17 +283,17 @@
 			#dma-cells = <3>;
 			reg = <0x50081000 0x400>;
 			interrupts = <2 0 3 0 4 0 5 0 6 0 7 0 8 0 9 0>;
-			clocks = <&rcc SF32LB_CLOCK(ECR1, DMAC1)>;
+			clocks = <&rcc ECR1 DMAC1>;
 			dma-requests = <7>;
 			status = "disabled";
 		};
-
 		lptim1: timers@500c1000 {
 			compatible = "sifli,lptim";
 			reg = <0x500c1000 0x400>;
 			interrupts = <46 1>;
 			status = "disabled";
 		};
+*/
 
 		radio: radio@40090000 {
 			compatible = "sifli,sf-bt-radio";
@@ -335,14 +334,14 @@
 			reg = <0x500cb000 0x400>;
 			status = "disabled";
 		};
-
+/*
 		i2c0: i2c@5009c000 {
 			compatible = "sifli,i2c";
 			reg = <0x5009c000 0x1000>;
 			#address-cells = <1>;
 			#size-cells = <0>;
 			clock-frequency = <I2C_BITRATE_STANDARD>;
-			clocks = <&rcc SF32LB_CLOCK(ECR1, I2C1)>;
+			clocks = <&rcc ECR1 I2C1>;
 			status = "disabled";
 		};
 
@@ -352,7 +351,7 @@
 			#address-cells = <1>;
 			#size-cells = <0>;
 			clock-frequency = <I2C_BITRATE_STANDARD>;
-			clocks = <&rcc SF32LB_CLOCK(ECR1, I2C2)>;
+			clocks = <&rcc ECR1 I2C2>;
 			status = "disabled";
 		};
 
@@ -362,7 +361,7 @@
 			#address-cells = <1>;
 			#size-cells = <0>;
 			clock-frequency = <I2C_BITRATE_STANDARD>;
-			clocks = <&rcc SF32LB_CLOCK(ECR1, I2C3)>;
+			clocks = <&rcc ECR1 I2C3>;
 			status = "disabled";
 		};
 
@@ -372,9 +371,10 @@
 			#address-cells = <1>;
 			#size-cells = <0>;
 			clock-frequency = <I2C_BITRATE_STANDARD>;
-			clocks = <&rcc SF32LB_CLOCK(ECR1, I2C4)>;
+			clocks = <&rcc ECR1 I2C4>;
 			status = "disabled";
 		};
+        */
 		//rng1: rng@4000F000 {
 			//        compatible = "sifli,rng";
 			//        reg = <0x4000F000 0x400>;

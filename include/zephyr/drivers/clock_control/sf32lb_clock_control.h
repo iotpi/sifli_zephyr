@@ -25,4 +25,9 @@
 #define SF32_SCLK_PDIV2   DT_PROP(DT_NODELABEL(clk_sys), pdiv2)
 #endif
 
+struct sf32lb_rcc_clock {
+    uint32_t reg;
+    uint32_t bit;
+};
+
 #endif /* _ZEPHYR_INCLUDE_DRIVERS_CLOCK_CONTROL_SFLB32_CLOCK_CONTROL_H_ */
