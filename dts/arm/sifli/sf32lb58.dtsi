@@ -9,18 +9,30 @@
 / {
     clocks {
         clk_lrc10: clk-lrc10 {
+            compatible = "fixed-clock";
+            #clock-cells = <0>;
+            clock-frequency = <DT_FREQ_K(10)>;
             status = "disabled";
         };
 
         clk_lxt32: clk-lxt32 {
+            compatible = "fixed-clock";
+            #clock-cells = <0>;
+            clock-frequency = <32768>;
             status = "disabled";
         };
 
         clk_hrc48: clk-hrc48 {
+            compatible = "fixed-clock";
+            #clock-cells = <0>;
+            clock-frequency = <DT_FREQ_M(48)>;
             status = "disabled";
         };
 
         clk_hxt48: clk-hxt48 {
+            compatible = "fixed-clock";
+            #clock-cells = <0>;
+            clock-frequency = <DT_FREQ_M(48)>;
             status = "disabled";
         };
     };
