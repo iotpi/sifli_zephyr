@@ -1,0 +1,31 @@
+/*
+ * Copyright (c) 2025 Qingdao IotPi Ltd.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+#include <arm/armv8-m.dtsi>
+
+/ {
+    clocks {
+        clk_lrc10: clk-lrc10 {
+            status = "disabled";
+        };
+
+        clk_lxt32: clk-lxt32 {
+            status = "disabled";
+        };
+
+        clk_hrc48: clk-hrc48 {
+            status = "disabled";
+        };
+
+        clk_hxt48: clk-hxt48 {
+            status = "disabled";
+        };
+    };
+
+    soc {
+        
+    };
+};
