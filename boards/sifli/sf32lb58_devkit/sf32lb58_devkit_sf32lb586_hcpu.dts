@@ -1,0 +1,26 @@
+/*
+ * Copyright (c) 2025 Qingdao IotPi Ltd.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/dts-v1/;
+#include <sifli/sf32lb586_hcpu.dtsi>
+#include <mem.h>
+
+/ {
+    model = "SiFli SF32LB58 DevKit HCPU";
+    compatible = "sifli,sf32lb58_devkit_sf32lb586_hcpu";
+
+    chosen {
+        /*
+        zephyr,console = &usart1;
+        zephyr,shell-uart = &usart1;
+        */
+		zephyr,flash = &flash3;
+    };
+};
+
+&flash3 {
+    reg = <0x64000000 DT_SIZE_M(1)>;
+};

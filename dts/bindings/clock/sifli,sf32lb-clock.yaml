@@ -1,0 +1,33 @@
+# Copyright (c) 2025 Qingdao IotPi Ltd.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+
+description: |
+  Sifli SF32xxx Reset and Clock Controller
+
+compatible: "sifli,sf32lb-clock"
+
+include: [clock-controller.yaml, base.yaml]
+
+properties:
+  reg:
+    required: true
+    description: register address map
+
+  # clock-configs:
+  #   required: true
+  #   type: phandle-array
+  #   description: |
+  #     clock configs are used to specify configuration of the
+  #     SoC clock DIV fields. Such as PDIV1 PDIV2 fields in
+  #     CFGR register of HPSYS_RCC. For example:
+  #       clock-configs = <PDIV1 2>, <PDIV2 3>;
+
+  "#clock-cells":
+    const: 0
+
+  # "#clock-config-cells":
+  #   type: int
+  #   required: true
+  #   const: 2

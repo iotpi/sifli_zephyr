@@ -5,6 +5,8 @@
  */
 
 #include <arm/armv8-m.dtsi>
+#include <freq.h>
+#include <mem.h>
 
 / {
     clocks {
@@ -35,9 +37,42 @@
             clock-frequency = <DT_FREQ_M(48)>;
             status = "disabled";
         };
+
+        clk_dll1: clk-dll1 {
+        };
     };
 
     soc {
-        
+        hpsys_rcc: hpsys-rcc@40000000 {
+            compatible = "sifli,sf32lb-clock";
+            #clock-cells = <0>;
+            reg = <0x40000000 0x1000>;
+            /* #clock-config-cells = <2>; */
+            /* clock-configs = <& 0x14 0x00>; */
+            clocks = <&clk_hrc48>;
+        };
+
+        sram_hcpu: sram-hcpu@20000000 {
+            compatible = "mmio-sram";
+            reg = <0x20000000 DT_SIZE_K(2048)>;
+        };
+
+        sram_acpu: sram-acpu@20200000 {
+            compatible = "mmio-sram";
+            reg = <0x20200000 DT_SIZE_K(512)>;
+        };
+
+        sram_retention: sram-retention@00020000 {
+            compatible = "mmio-sram";
+            reg = <0x00020000 DT_SIZE_K(64)>;
+        };
+
+        flash3: flash_controller@64000000 {
+            compatible = "soc-nv-flash";
+        };
     };
+};
+
+&nvic {
+	arm,num-irq-priority-bits = <3>;
 };

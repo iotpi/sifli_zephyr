@@ -6,8 +6,13 @@
 
 #include <arm/armv8-m.dtsi>
 #include <sifli/sf32lb58_hpsys.dtsi>
+#include <mem.h>
 
 / {
+    chosen {
+		zephyr,sram = &sram_hcpu;
+    };
+
     cpus {
 		#address-cells = <1>;
 		#size-cells = <0>;
@@ -16,13 +21,7 @@
 			device_type = "cpu";
 			compatible = "arm,cortex-m33f";
 			reg = <0>;
-			cpu-power-states = <&stop0 &stop1 &stop2>;
+			// cpu-power-states = <&stop0 &stop1 &stop2>;
 		};
     };
-
-    sram-hcpu: memory@20000000 {
-		compatible = "mmio-sram";
-		reg = <0x20000000 DT_SIZE_K(2048)>;
-	};
-
 };

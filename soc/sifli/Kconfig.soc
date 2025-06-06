@@ -9,6 +9,6 @@ config SOC_FAMILY_SF32LB
 #    default y
 
 config SOC_FAMILY
-	default "sf32lb" if SOC_SERIES_SF32LB
+	default "sf32lb" if SOC_FAMILY_SF32LB
 
 rsource "*/Kconfig.soc"

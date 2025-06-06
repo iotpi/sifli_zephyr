@@ -10,5 +10,6 @@ if SOC_FAMILY_SF32LB
 # Source series Kconfig files first, so SoCs
 # can override the defaults given here
 rsource "*/Kconfig.defconfig"
+
 endif # SOC_FAMILY_SF32LB
 

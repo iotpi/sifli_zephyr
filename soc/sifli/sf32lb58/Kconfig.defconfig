@@ -1,0 +1,5 @@
+if SOC_SERIES_SF32LB58
+
+rsource "Kconfig.defconfig.*"
+
+endif # SOC_SERIES_SF32LB58

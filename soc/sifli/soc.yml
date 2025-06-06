@@ -13,3 +13,10 @@ family:
     - name: sf32lb523
     - name: sf32lb525
     - name: sf32lb527
+  - name: sf32lb58x
+    socs:
+    - name: sf32lb583
+    - name: sf32lb585
+    - name: sf32lb586
+    - name: sf32lb587
+      

@@ -6,10 +6,7 @@
 
 #include <arm/armv8-m.dtsi>
 #include <sifli/sf32lb58.dtsi>
+#include <mem.h>
 
 / {
-    sram_retention: memory@20000 {
-		compatible = "mmio-sram";
-		reg = <0x20000 DT_SIZE_K(64)>;
-	};
 };
