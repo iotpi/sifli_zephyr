@@ -13,10 +13,26 @@ family:
     - name: sf32lb523
     - name: sf32lb525
     - name: sf32lb527
-  - name: sf32lb58x
+  - name: sf32lb58
     socs:
     - name: sf32lb583
+      cpucluster:
+        - name: hcpu
+        - name: acpu
+        - name: lcpu
     - name: sf32lb585
+      cpucluster:
+        - name: hcpu
+        - name: acpu
+        - name: lcpu
     - name: sf32lb586
+      cpucluster:
+        - name: hcpu
+        - name: acpu
+        - name: lcpu
     - name: sf32lb587
+      cpucluster:
+        - name: hcpu
+        - name: acpu
+        - name: lcpu
       
