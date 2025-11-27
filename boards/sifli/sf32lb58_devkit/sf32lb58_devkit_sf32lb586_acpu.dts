@@ -5,7 +5,7 @@
  */
 
 /dts-v1/;
-#include <sifli/sf32lb586_acpu.dtsi>
+#include <sifli/sf32lb58_hpsys_acpu.dtsi>
 
 / {
     model = "SiFli SF32LB58 DevKit ACPU";
@@ -14,7 +14,7 @@
     chosen {
         zephyr,console = &usart1;
         zephyr,shell-uart = &usart1;
-		zephyr,sram = &sram0;
-		zephyr,flash = &flash2;
+		zephyr,sram = &sram_acpu;
+		zephyr,flash = &flash3;
     };
 };

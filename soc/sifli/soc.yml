@@ -16,23 +16,23 @@ family:
   - name: sf32lb58
     socs:
     - name: sf32lb583
-      cpucluster:
-        - name: hcpu
-        - name: acpu
-        - name: lcpu
+      cpuclusters:
+      - name: hcpu
+      - name: acpu
+      - name: lcpu
     - name: sf32lb585
-      cpucluster:
-        - name: hcpu
-        - name: acpu
-        - name: lcpu
+      cpuclusters:
+      - name: hcpu
+      - name: acpu
+      - name: lcpu
     - name: sf32lb586
-      cpucluster:
-        - name: hcpu
-        - name: acpu
-        - name: lcpu
+      cpuclusters:
+      - name: hcpu
+      - name: acpu
+      - name: lcpu
     - name: sf32lb587
-      cpucluster:
-        - name: hcpu
-        - name: acpu
-        - name: lcpu
+      cpuclusters:
+      - name: hcpu
+      - name: acpu
+      - name: lcpu
       

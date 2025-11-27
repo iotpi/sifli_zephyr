@@ -4,6 +4,3 @@ board:
   vendor: sifli
   socs:
     - name: sf32lb586
-      variants:
-      - name: 'hcpu'
-        cpucluster: 'hcpu'

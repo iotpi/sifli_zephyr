@@ -9,4 +9,19 @@
 #include <mem.h>
 
 / {
+    clocks {
+        clk_peri_hpsys: clk-peri-hpsys {
+            compatible = "fixed-clock";
+            #clock-cells = <0>; /* clock, selection */
+            clock-frequency = <DT_FREQ_K(10)>;
+            clocks = <&clk_hxt48>;
+        };
+    };
+
+    usart1: usart@40004000 {
+        compatible = "sifli,usart";
+        reg = <0x40004000 0x5000>;
+        status = "disabled";
+        clocks = <&clk_peri_hpsys>;
+    };
 };
