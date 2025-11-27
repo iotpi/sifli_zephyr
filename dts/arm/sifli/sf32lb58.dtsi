@@ -66,6 +66,11 @@
             compatible = "soc-nv-flash";
             reg = <0x64000000 0x4000000>;
         };
+
+        flash4: flash_controller@18000000 {
+            compatible = "soc-nv-flash";
+            reg = <0x18000000 0x4000000>;
+        };
     };
 };
 
