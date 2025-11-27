@@ -13,6 +13,13 @@
 		zephyr,sram = &sram_hcpu;
     };
 
+    soc {
+        sram_retention: sram-retention@00020000 {
+            compatible = "mmio-sram";
+            reg = <0x00020000 DT_SIZE_K(64)>;
+        };
+    };
+
     cpus {
 		#address-cells = <1>;
 		#size-cells = <0>;

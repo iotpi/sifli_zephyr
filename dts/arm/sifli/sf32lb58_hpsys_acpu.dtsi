@@ -8,6 +8,14 @@
 #include <sifli/sf32lb58_hpsys.dtsi>
 
 / {
+    soc {
+        /* same to sram_acpu */
+        sram: sram@00000000 {
+            compatible = "mmio-sram";
+            reg = <0x00000000 DT_SIZE_K(512)>;
+        };
+    };
+
     cpus {
 		#address-cells = <1>;
 		#size-cells = <0>;
