@@ -5,8 +5,10 @@
  */
 
 #include <arm/armv8-m.dtsi>
-#include <sifli/sf32lb58.dtsi>
 #include <mem.h>
+
+#include <sifli/sf32lb58.dtsi>
+#include <zephyr/dt-bindings/clock/sf32lb58_clock.h>
 
 / {
     soc {
@@ -35,13 +37,33 @@
         };
 
         hpsys_rcc: hpsys-rcc@40000000 {
-            compatible = "sifli,sf32lb58-clock";
-            #clock-cells = <0>;
+            compatible = "sifli,sf32lb58-hpsys-rcc";
+            status = "okay";
+            #clock-cells = <2>;
             reg = <0x40000000 0x1000>;
-            /* #clock-config-cells = <2>; */
-            /* clock-configs = <& 0x14 0x00>; */
-            clocks = <&clk_hrc48>;
+
+            clocks = <&clk_hxt48>, <&clk_hrc48>, <&clk_lxt32>, <&clk_lrc10>;
+            clock-names = "hxt48", "hrc48", "lxt32", "lrc10";
+
+            sel-sys = <HPSYS_RCC_SEL_SYS_HXT48>;
+            sel-lp-sys = <HPSYS_RCC_SEL_LP_SYS_SEL_SYS>;
+            sel-mpi1 = <HPSYS_RCC_SEL_MPI_HPSYS>;
+            sel-mpi2 = <HPSYS_RCC_SEL_MPI_HPSYS>;
+            sel-mpi3 = <HPSYS_RCC_SEL_MPI_HPSYS>;
+            sel-mpi4 = <HPSYS_RCC_SEL_MPI_HPSYS>;
+            sel-peri = <HPSYS_RCC_SEL_PERI_HXT48>;
+            sel-pdm1 = <HPSYS_RCC_SEL_PDM_HPSYS>;
+            sel-pdm2 = <HPSYS_RCC_SEL_PDM_HPSYS>;
+            sel-usbc = <HPSYS_RCC_SEL_USBC_HPSYS>;
+            sel-sdmmc = <HPSYS_RCC_SEL_SDMMC_HPSYS>;
         };
+
+		hpsys_aon: hpsys-aon@40040000 {
+			compatible = "sifli,sf32lb58-hpsys-aon";
+			reg = <0x40040000 0x1000>;
+            #clock-cells = <1>;
+            status = "okay";
+		};
     };
 
     clocks {
@@ -51,12 +73,35 @@
             clock-frequency = <DT_FREQ_K(10)>;
             clocks = <&clk_hxt48>;
         };
+
+        clk_dll1: clk-dll0 {
+        };
+
+        clk_dll2: clk-dll1 {
+        };
+
+        clk_dll3: clk-dll2 {
+        };
     };
 
     usart1: usart@40004000 {
-        compatible = "sifli,usart";
+        /* compatible = "sifli,sf32lb-usart"; */
         reg = <0x40004000 0x5000>;
         status = "disabled";
-        clocks = <&clk_peri_hpsys>;
+        /* interrupts = <59 0>; */
+        /* pinctrl-0 = <>; */
+        /* pinctrl-names = "default"; */
     };
+};
+
+&clk_hxt48 {
+    clocks = <&hpsys_aon HPSYS_AON_SUBSYS_HXT48>;
+};
+
+&clk_hrc48 {
+    clocks = <&hpsys_aon HPSYS_AON_SUBSYS_HRC48>;
+};
+
+&clk_lrc10 {
+    clocks = <&hpsys_aon HPSYS_AON_SUBSYS_LRC10>;
 };

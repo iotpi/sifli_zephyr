@@ -17,3 +17,7 @@
         zephyr,shell-uart = &usart1;
     };
 };
+
+&usart1 {
+    status = "okay";
+};

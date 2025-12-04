@@ -1,0 +1,8 @@
+if CLOCK_CONTROL
+
+module = CLOCK_CONTROL
+module-str = clock control
+
+rsource "Kconfig.sf32lb58"
+
+endif # CLOCK_CONTROL
