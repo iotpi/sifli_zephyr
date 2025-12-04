@@ -88,7 +88,7 @@ static int hpsys_rcc_init(const struct device *dev)
   }
 
   /* SEL_SYS_LP select SEL_SYS or clk_lp, which are not handled here */
-  
+
   const struct hpsys_rcc_config *config = dev->config;
   sys_write32(config->csr, config->base + HPSYS_RCC_CSR);
   return 0;
