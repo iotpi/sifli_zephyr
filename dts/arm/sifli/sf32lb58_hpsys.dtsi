@@ -42,8 +42,8 @@
             #clock-cells = <2>;
             reg = <0x40000000 0x1000>;
 
-            clocks = <&clk_hxt48>, <&clk_hrc48>, <&clk_lxt32>, <&clk_lrc10>;
-            clock-names = "hxt48", "hrc48", "lxt32", "lrc10";
+            clocks = <&clk_hxt48>, <&clk_hrc48>, <&clk_lxt32>, <&clk_lrc10>, <&clk_peri_hpsys>;
+            clock-names = "hxt48", "hrc48", "lxt32", "lrc10", "peri_hpsys";
 
             sel-sys = <HPSYS_RCC_SEL_SYS_HXT48>;
             sel-lp-sys = <HPSYS_RCC_SEL_LP_SYS_SEL_SYS>;
@@ -68,9 +68,9 @@
 
     clocks {
         clk_peri_hpsys: clk-peri-hpsys {
-            compatible = "fixed-clock";
+            compatible = "sifli,sf32lb58-peri-hpsys-clk";
             #clock-cells = <0>; /* clock, selection */
-            clock-frequency = <DT_FREQ_K(10)>;
+            clock-frequency = <DT_FREQ_M(48)>;
             clocks = <&clk_hxt48>;
         };
 
