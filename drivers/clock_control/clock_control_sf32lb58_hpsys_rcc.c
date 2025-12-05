@@ -78,11 +78,41 @@ static int check_sel_sys(const struct device *dev)
   return check_clock_driver_status(clk_dev);
 }
 
+static int check_sel_hpsys_peri(const struct device *dev)
+{
+  const struct hpsys_rcc_config *config = dev->config;
+  const struct device *clk_dev = NULL;
+  uint8_t clk_sel;
+
+  clk_sel = FIELD_GET(HPSYS_RCC_CSR_SEL_PERI, config->csr);
+  switch (clk_sel) {
+#if DT_NODE_HAS_STATUS_OKAY(DT_INST_CLOCKS_CTLR_BY_NAME(0, hrc48))
+  case HPSYS_RCC_SEL_PERI_HRC48:
+    clk_dev = DEVICE_DT_GET(DT_INST_CLOCKS_CTLR_BY_NAME(0, hrc48));
+    break;
+#endif
+#if DT_NODE_HAS_STATUS_OKAY(DT_INST_CLOCKS_CTLR_BY_NAME(0, hxt48))
+  case HPSYS_RCC_SEL_PERI_HXT48:
+    clk_dev = DEVICE_DT_GET(DT_INST_CLOCKS_CTLR_BY_NAME(0, hxt48));
+    break;
+#endif
+  default:
+    break;
+  }
+
+  return check_clock_driver_status(clk_dev);
+}
+
 static int hpsys_rcc_init(const struct device *dev)
 {
   int ret;
 
   ret = check_sel_sys(dev);
+  if (ret) {
+    return ret;
+  }
+
+  ret = check_sel_hpsys_peri(dev);
   if (ret) {
     return ret;
   }
