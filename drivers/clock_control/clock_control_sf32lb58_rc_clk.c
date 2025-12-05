@@ -40,11 +40,29 @@ static int rc_clk_on(const struct device *dev, clock_control_subsys_t sys)
   api->on(config->aon_dev, config->aon_subsys);
   return 0;
 }
-  
+
+static enum clock_control_status rc_clk_get_status(const struct device *dev, clock_control_subsys_t sys)
+{
+  const struct rc_clk_config *config = dev->config;
+  ARG_UNUSED(sys);
+  __ASSERT(true == device_is_ready(config->aon_dev), "aon_dev is not ready");
+  return clock_control_get_status(config->aon_dev, config->aon_subsys);
+}
+
+static int rc_clk_get_rate(const struct device *dev,
+					clock_control_subsys_t subsys,
+					uint32_t *rate)
+{
+  ARG_UNUSED(subsys);
+  *rate = ((const struct rc_clk_config *)dev->config)->clk_freq;
+  return 0;
+}
+
 static DEVICE_API(clock_control, rc_clk_api) = {
   .on = rc_clk_on,
   .off = NULL,
-  .get_status = NULL,
+  .get_status = rc_clk_get_status,
+  .get_rate = rc_clk_get_rate,
 };
 
 static struct rc_clk_config config = {

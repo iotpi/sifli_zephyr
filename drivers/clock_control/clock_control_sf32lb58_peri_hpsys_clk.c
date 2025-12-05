@@ -48,11 +48,21 @@ static enum clock_control_status peri_hpsys_clk_get_status(const struct device *
   __ASSERT(true == device_is_ready(config->clk_dev), "clk_dev is not ready");
   return clock_control_get_status(config->clk_dev, (clock_control_subsys_t)0);
 } 
-  
+
+static int peri_hpsys_clk_get_rate(const struct device *dev,
+					clock_control_subsys_t subsys,
+					uint32_t *rate)
+{
+  ARG_UNUSED(subsys);
+  *rate = ((const struct peri_hpsys_clk_config *)dev->config)->clk_freq;
+  return 0;
+}
+
 static DEVICE_API(clock_control, peri_hpsys_clk_api) = {
   .on = peri_hpsys_clk_on,
   .off = peri_hpsys_clk_off,
   .get_status = peri_hpsys_clk_get_status,
+  .get_rate = peri_hpsys_clk_get_rate,
 };
 
 static struct peri_hpsys_clk_config config = {

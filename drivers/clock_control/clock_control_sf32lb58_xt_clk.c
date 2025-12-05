@@ -48,12 +48,22 @@ static enum clock_control_status xt_clk_get_status(const struct device *dev, clo
   ARG_UNUSED(sys);
   __ASSERT(true == device_is_ready(config->aon_dev), "aon_dev is not ready");
   return clock_control_get_status(config->aon_dev, config->aon_subsys);
-} 
+}
+
+static int xt_clk_get_rate(const struct device *dev,
+					clock_control_subsys_t subsys,
+					uint32_t *rate)
+{
+  ARG_UNUSED(subsys);
+  *rate = ((const struct xt_clk_config *)dev->config)->clk_freq;
+  return 0;
+}
   
 static DEVICE_API(clock_control, xt_clk_api) = {
   .on = xt_clk_on,
   .off = xt_clk_off,
   .get_status = xt_clk_get_status,
+  .get_rate =  xt_clk_get_rate,
 };
 
 static struct xt_clk_config config = {
