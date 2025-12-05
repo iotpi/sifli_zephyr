@@ -30,11 +30,12 @@ static int hpsys_aon_init(const struct device *dev)
 /* static int hpsys_aon_ */
 static int hpsys_aon_on(const struct device *dev, clock_control_subsys_t sys)
 {
+  const struct hpsys_aon_config *config = dev->config;
   uint32_t acr = 0;
 
   ARG_UNUSED(dev);
 
-  acr = sys_read32(HPSYS_AON_ACR);
+  acr = sys_read32(config->base + HPSYS_AON_ACR);
 
   switch ((uintptr_t)sys) {
   case HPSYS_AON_SUBSYS_HXT48:
@@ -51,11 +52,12 @@ static int hpsys_aon_on(const struct device *dev, clock_control_subsys_t sys)
 
 static int hpsys_aon_off(const struct device *dev, clock_control_subsys_t sys)
 {
+  const struct hpsys_aon_config *config = dev->config;
   uint32_t acr = 0;
 
   ARG_UNUSED(dev);
 
-  acr = sys_read32(HPSYS_AON_ACR);
+  acr = sys_read32(config->base + HPSYS_AON_ACR);
 
   switch ((uintptr_t)sys) {
   case HPSYS_AON_SUBSYS_HXT48:
@@ -72,10 +74,11 @@ static int hpsys_aon_off(const struct device *dev, clock_control_subsys_t sys)
 
 static enum clock_control_status hpsys_aon_get_status(const struct device *dev, clock_control_subsys_t sys)
 {
+  const struct hpsys_aon_config *config = dev->config;
   uint32_t acr = 0;
   ARG_UNUSED(dev);
   
-  acr = sys_read32(HPSYS_AON_ACR);
+  acr = sys_read32(config->base + HPSYS_AON_ACR);
   switch ((uintptr_t)sys) {
   case HPSYS_AON_SUBSYS_HXT48:
     if (HPSYS_AON_ACR_HXT48_REQ & acr) {
