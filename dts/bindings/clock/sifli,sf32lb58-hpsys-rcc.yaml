@@ -52,3 +52,6 @@ properties:
   sel-sdmmc:
     type: int
     required: true
+
+clock-cells:
+  - subsys

@@ -11,6 +11,9 @@
 #define HPSYS_AON_SUBSYS_HRC48       1
 #define HPSYS_AON_SUBSYS_LRC10       2
 
+#define HPSYS_RCC_SUBSYS_PINMUX1     2
+#define HPSYS_RCC_SUBSYS_USART1      3
+
 #define HPSYS_RCC_SEL_SYS_HRC48      0
 #define HPSYS_RCC_SEL_SYS_HXT48      1
 #define HPSYS_RCC_SEL_SYS_DLL1       3

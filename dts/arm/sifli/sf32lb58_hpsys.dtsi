@@ -39,7 +39,7 @@
         hpsys_rcc: hpsys-rcc@40000000 {
             compatible = "sifli,sf32lb58-hpsys-rcc";
             status = "okay";
-            #clock-cells = <2>;
+            #clock-cells = <1>;
             reg = <0x40000000 0x1000>;
 
             clocks = <&clk_hxt48>, <&clk_hrc48>, <&clk_lxt32>, <&clk_lrc10>, <&clk_peri_hpsys>;
@@ -64,6 +64,23 @@
             #clock-cells = <1>;
             status = "okay";
 		};
+
+        pinctrl: pinctrl@40003000 {
+            compatible = "sifli,sf32lb58-pinmux";
+            reg = <0x40003000 0x1000>;
+            clocks = <&hpsys_rcc HPSYS_RCC_SUBSYS_PINMUX1>;
+            status = "okay";
+        };
+
+        usart1: usart@40004000 {
+            compatible = "sifli,sf32lb58-usart";
+            reg = <0x40004000 0x1000>;
+            status = "disabled";
+            clocks = <&clk_peri_hpsys>, <&hpsys_rcc HPSYS_RCC_SUBSYS_USART1>;
+            /* interrupts = <59 0>; */
+            /* pinctrl-0 = <>; */
+            /* pinctrl-names = "default"; */
+        };
     };
 
     clocks {
@@ -82,15 +99,6 @@
 
         clk_dll3: clk-dll2 {
         };
-    };
-
-    usart1: usart@40004000 {
-        /* compatible = "sifli,sf32lb-usart"; */
-        reg = <0x40004000 0x5000>;
-        status = "disabled";
-        /* interrupts = <59 0>; */
-        /* pinctrl-0 = <>; */
-        /* pinctrl-names = "default"; */
     };
 };
 
