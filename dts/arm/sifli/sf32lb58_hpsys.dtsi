@@ -65,11 +65,16 @@
             status = "okay";
 		};
 
-        pinctrl: pinctrl@40003000 {
+        pinmux: pinmux@40003000 {
             compatible = "sifli,sf32lb58-pinmux";
             reg = <0x40003000 0x1000>;
             clocks = <&hpsys_rcc HPSYS_RCC_SUBSYS_PINMUX1>;
             status = "okay";
+
+            pinctrl: pinctrl {
+                compatible = "sifli,sf32lb58-pinctrl";
+                status = "okay";
+            };
         };
 
         usart1: usart@40004000 {
@@ -78,8 +83,8 @@
             status = "disabled";
             clocks = <&clk_peri_hpsys>, <&hpsys_rcc HPSYS_RCC_SUBSYS_USART1>;
             /* interrupts = <59 0>; */
-            /* pinctrl-0 = <>; */
-            /* pinctrl-names = "default"; */
+            pinctrl-0 = <>;
+            pinctrl-names = "default";
         };
     };
 

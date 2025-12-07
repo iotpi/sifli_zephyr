@@ -6,6 +6,7 @@
 
 /dts-v1/;
 #include <sifli/sf32lb586_n16r32n1_hpsys_hcpu.dtsi>
+#include "sf32lb58_devkit_sf32lb58_hpsys-pinctrl.dtsi"
 #include <mem.h>
 
 / {
@@ -19,5 +20,7 @@
 };
 
 &usart1 {
+    pinctrl-0 = <&pinmux_usart1_default>;
+    pinctrl-names = "default";
     status = "okay";
 };
