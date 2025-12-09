@@ -78,12 +78,13 @@
         };
 
         usart1: usart@40004000 {
-            compatible = "sifli,sf32lb58-usart";
+            compatible = "sifli,sf32lb-usart";
             reg = <0x40004000 0x1000>;
             status = "disabled";
-            clocks = <&clk_peri_hpsys>, <&hpsys_rcc HPSYS_RCC_SUBSYS_USART1>;
-            /* interrupts = <59 0>; */
-            pinctrl-0 = <>;
+            current-speed = <1000000>;
+            clocks =<&hpsys_rcc HPSYS_RCC_SUBSYS_USART1>, <&clk_peri_hpsys>;
+            interrupts = <59 0>;
+            pinctrl-0 = <&pinmux_usart1_default>;
             pinctrl-names = "default";
         };
     };

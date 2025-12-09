@@ -54,4 +54,4 @@ properties:
     required: true
 
 clock-cells:
-  - subsys
+  - id # subsys, named as `id` to be compatible to sf32lb drivers

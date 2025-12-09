@@ -33,7 +33,7 @@ static int pinmux_init(const struct device *dev)
 static const struct pinmux_config config = {
     .base = DT_REG_ADDR(DT_DRV_INST(0)),
     .clk = DEVICE_DT_GET(DT_INST_CLOCKS_CTLR(0)),
-    .subsys = (clock_control_subsys_t)DT_INST_CLOCKS_CELL(0, subsys),
+    .subsys = (clock_control_subsys_t)DT_INST_CLOCKS_CELL(0, id),
 };
 
 DEVICE_DT_INST_DEFINE(0, pinmux_init, NULL, NULL, &config,
