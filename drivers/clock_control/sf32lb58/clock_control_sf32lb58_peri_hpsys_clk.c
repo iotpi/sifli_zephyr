@@ -29,7 +29,7 @@ static int peri_hpsys_clk_on(const struct device *dev, clock_control_subsys_t sy
 {
   const struct peri_hpsys_clk_config *config = dev->config;
   ARG_UNUSED(sys);
-  __ASSERT(true == device_is_ready(config->aon_dev), "clk_dev is not ready");
+  __ASSERT(true == device_is_ready(config->aon_dev), "aon_dev is not ready");
   return clock_control_on(config->clk_dev, (clock_control_subsys_t)0);
 }
 
