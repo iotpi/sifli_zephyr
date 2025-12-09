@@ -39,10 +39,10 @@ static int hpsys_aon_on(const struct device *dev, clock_control_subsys_t sys)
 
   switch ((uintptr_t)sys) {
   case HPSYS_AON_SUBSYS_HXT48:
-    sys_set_bit(HPSYS_AON_ACR, HPSYS_AON_ACR_HXT48_REQ_Pos);
+    sys_set_bit(config->base + HPSYS_AON_ACR, HPSYS_AON_ACR_HXT48_REQ_Pos);
     break;
   case HPSYS_AON_SUBSYS_HRC48:
-    sys_set_bit(HPSYS_AON_ACR, HPSYS_AON_ACR_HRC48_REQ_Pos);
+    sys_set_bit(config->base + HPSYS_AON_ACR, HPSYS_AON_ACR_HRC48_REQ_Pos);
     break;
   default:
     return -ENOSYS;
