@@ -16,7 +16,7 @@
 
 struct pinmux_config {
   uintptr_t base;
-  struct device *clk;
+  const struct device *clk;
   clock_control_subsys_t subsys;
 };
 
@@ -27,7 +27,7 @@ static int pinmux_init(const struct device *dev)
     return -ENODEV;
   }
 
-  clock_control_on(config->clk, clock_control_subsys_t sys)
+  return clock_control_on(config->clk, config->subsys);
 }
 
 static const struct pinmux_config config = {
