@@ -124,6 +124,43 @@ static int hpsys_rcc_init(const struct device *dev)
   return 0;
 }
 
+static int hpsys_rcc_on(const struct device* dev, clock_control_subsys_t sys)
+{
+  const struct hpsys_rcc_config *config = dev->config;
+  switch ((uintptr_t)sys) {
+  case HPSYS_RCC_SUBSYS_PINMUX1:
+    sys_set_bit(config->base + HPSYS_RCC_ENR1, HPSYS_RCC_ENR1_PINMUX1_Pos);
+    break;
+  }
+  return 0;
+}
+
+static int hpsys_rcc_off(const struct device* dev, clock_control_subsys_t sys)
+{
+  const struct hpsys_rcc_config *config = dev->config;
+  switch ((uintptr_t)sys) {
+  case HPSYS_RCC_SUBSYS_PINMUX1:
+    sys_clear_bit(config->base + HPSYS_RCC_ENR1, HPSYS_RCC_ENR1_PINMUX1_Pos);
+    break;
+  }
+  return 0;
+}
+
+static enum clock_control_status hpsys_rcc_get_status(const struct device* dev, clock_control_subsys_t sys)
+{
+  const struct hpsys_rcc_config *config = dev->config;
+  switch ((uintptr_t)sys) {
+  case HPSYS_RCC_SUBSYS_PINMUX1:
+    if (sys_test_bit(config->base + HPSYS_RCC_ENR1, HPSYS_RCC_ENR1_PINMUX1_Pos)) {
+      return CLOCK_CONTROL_STATUS_ON;
+    } else {
+      return CLOCK_CONTROL_STATUS_OFF;
+    }
+    break;
+  }
+  return 0;
+}
+
 static const struct hpsys_rcc_config config = {
     .base = DT_REG_ADDR(DT_DRV_INST(0)),
     .csr =
@@ -141,9 +178,9 @@ static const struct hpsys_rcc_config config = {
 };
 
 static DEVICE_API(clock_control, hpsys_rcc_api) = {
-  .on = NULL,
-  .off = NULL,
-  .get_status = NULL,
+  .on = hpsys_rcc_on,
+  .off = hpsys_rcc_off,
+  .get_status = hpsys_rcc_get_status,
 };
 
 DEVICE_DT_INST_DEFINE(0, hpsys_rcc_init, NULL, NULL, &config,
