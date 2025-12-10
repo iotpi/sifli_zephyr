@@ -15,27 +15,26 @@
 #include <zephyr/drivers/clock_control.h>
 
 struct pinmux_config {
-  uintptr_t base;
-  const struct device *clk;
-  clock_control_subsys_t subsys;
+	uintptr_t base;
+	const struct device *clk;
+	clock_control_subsys_t subsys;
 };
 
 static int pinmux_init(const struct device *dev)
 {
-  const struct pinmux_config *config = dev->config;
-  if (true != device_is_ready(config->clk)) {
-    return -ENODEV;
-  }
+	const struct pinmux_config *config = dev->config;
+	if (true != device_is_ready(config->clk)) {
+		return -ENODEV;
+	}
 
-  return clock_control_on(config->clk, config->subsys);
+	return clock_control_on(config->clk, config->subsys);
 }
 
 static const struct pinmux_config config = {
-    .base = DT_REG_ADDR(DT_DRV_INST(0)),
-    .clk = DEVICE_DT_GET(DT_INST_CLOCKS_CTLR(0)),
-    .subsys = (clock_control_subsys_t)DT_INST_CLOCKS_CELL(0, id),
+	.base = DT_REG_ADDR(DT_DRV_INST(0)),
+	.clk = DEVICE_DT_GET(DT_INST_CLOCKS_CTLR(0)),
+	.subsys = (clock_control_subsys_t)DT_INST_CLOCKS_CELL(0, id),
 };
 
-DEVICE_DT_INST_DEFINE(0, pinmux_init, NULL, NULL, &config,
-                      PRE_KERNEL_1, CONFIG_KERNEL_INIT_PRIORITY_DEFAULT, NULL);
-
+DEVICE_DT_INST_DEFINE(0, pinmux_init, NULL, NULL, &config, PRE_KERNEL_1,
+		      CONFIG_KERNEL_INIT_PRIORITY_DEFAULT, NULL);
